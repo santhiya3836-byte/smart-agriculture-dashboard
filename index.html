@@ -8,73 +8,150 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>🌱 Smart Agriculture Dashboard</h1>
+    <header class="topbar">
+        <div class="brand">🌱 SmartFarm</div>
+        <span class="demo-badge">DEMO DASHBOARD</span>
+    </header>
 
-    <p class="welcome">
-        Welcome to my smart agriculture project.
-    </p>
+    <main class="container">
+        <section class="welcome">
+            <div>
+                <p class="eyebrow">AGRICULTURE MONITORING</p>
+                <h1>Smart Agriculture Dashboard</h1>
+                <p class="subtitle">
+                    Monitor field conditions and explore irrigation recommendations.
+                </p>
+            </div>
+            <div class="farm-icon">🌾</div>
+        </section>
 
-    <h2>Farm Monitoring</h2>
+        <section class="section">
+            <div class="section-heading">
+                <div>
+                    <h2>Farm Overview</h2>
+                    <p>Sample field readings</p>
+                </div>
+                <span class="live-badge">● Demo data</span>
+            </div>
 
-    <div class="dashboard">
-        <div class="card">
-            <h3>💧 Soil Moisture</h3>
-            <p class="value">65%</p>
-            <p>Soil water level</p>
-        </div>
+            <div class="dashboard">
+                <article class="card">
+                    <div class="card-top">
+                        <span class="sensor-icon blue">💧</span>
+                        <span class="card-label">SOIL MOISTURE</span>
+                    </div>
+                    <p class="value">65<span>%</span></p>
+                    <p class="card-note">Sample soil water level</p>
+                    <div class="progress"><span style="width:65%"></span></div>
+                </article>
 
-        <div class="card">
-            <h3>🌡️ Temperature</h3>
-            <p class="value">30°C</p>
-            <p>Field temperature</p>
-        </div>
+                <article class="card">
+                    <div class="card-top">
+                        <span class="sensor-icon orange">🌡️</span>
+                        <span class="card-label">TEMPERATURE</span>
+                    </div>
+                    <p class="value">30<span>°C</span></p>
+                    <p class="card-note">Sample field temperature</p>
+                    <div class="progress orange-bar"><span style="width:60%"></span></div>
+                </article>
 
-        <div class="card">
-            <h3>💦 Humidity</h3>
-            <p class="value">70%</p>
-            <p>Air moisture level</p>
-        </div>
+                <article class="card">
+                    <div class="card-top">
+                        <span class="sensor-icon cyan">💦</span>
+                        <span class="card-label">HUMIDITY</span>
+                    </div>
+                    <p class="value">70<span>%</span></p>
+                    <p class="card-note">Sample air humidity</p>
+                    <div class="progress cyan-bar"><span style="width:70%"></span></div>
+                </article>
 
-        <div class="card">
-            <h3>🌿 Crop Status</h3>
-            <p class="value">Healthy</p>
-            <p>Crop condition</p>
-        </div>
-    </div>
+                <article class="card">
+                    <div class="card-top">
+                        <span class="sensor-icon green">🌿</span>
+                        <span class="card-label">CROP STATUS</span>
+                    </div>
+                    <p class="value status-value">Healthy</p>
+                    <p class="card-note">Illustrative crop condition</p>
+                    <span class="health-badge">● Good condition</span>
+                </article>
+            </div>
+        </section>
+
+        <section class="recommendation">
+            <div class="recommendation-heading">
+                <div>
+                    <p class="eyebrow">SMART IRRIGATION</p>
+                    <h2>💧 Irrigation Recommendation</h2>
+                    <p class="subtitle">Adjust the demo moisture value to explore recommendations.</p>
+                </div>
+                <span class="water-icon">🚿</span>
+            </div>
+
+            <div class="slider-row">
+                <label for="moisture">Soil moisture level</label>
+                <strong id="moistureValue">65%</strong>
+            </div>
+
+            <input type="range" id="moisture" min="0" max="100" value="65">
+            <div class="scale"><span>0% — Low</span><span>100% — High</span></div>
+
+            <div id="recommendationBox" class="recommendation-result">
+                <span id="resultIcon">✓</span>
+                <div>
+                    <h3 id="recommendationTitle">Moisture level is sufficient</h3>
+                    <p id="recommendationText">
+                        This simple demo rule does not indicate an immediate irrigation need.
+                    </p>
+                </div>
+            </div>
+
+            <p class="disclaimer">
+                Educational demo only. Real irrigation decisions depend on crop type,
+                growth stage, soil conditions and local weather.
+            </p>
+        </section>
+    </main>
+
     <footer>
-        Smart Agriculture Project | Agriculture Engineering
+        <p>🌱 Smart Agriculture Project</p>
+        <p>Built as an Agriculture Engineering learning project · Sample data only</p>
     </footer>
-<section class="recommendation">
-    <h2>💧 Irrigation Recommendation</h2>
 
-    <label for="moisture">Soil Moisture (%):</label>
-    <input type="range" id="moisture" min="0" max="100" value="65">
+    <script>
+        const slider = document.getElementById("moisture");
+        const valueText = document.getElementById("moistureValue");
+        const resultBox = document.getElementById("recommendationBox");
+        const resultIcon = document.getElementById("resultIcon");
+        const resultTitle = document.getElementById("recommendationTitle");
+        const resultText = document.getElementById("recommendationText");
 
-    <p>Current soil moisture: <strong id="moistureValue">65%</strong></p>
-    <p class="status" id="recommendationText">
-        Moisture level is sufficient for this demo.
-    </p>
-</section>
-<script>
-const moistureSlider = document.getElementById("moisture");
-const moistureValue = document.getElementById("moistureValue");
-const recommendationText = document.getElementById("recommendationText");
+        function updateRecommendation() {
+            const value = Number(slider.value);
+            valueText.textContent = value + "%";
 
-moistureSlider.addEventListener("input", function () {
-    const value = Number(this.value);
-    moistureValue.textContent = value + "%";
+            if (value < 30) {
+                resultBox.className = "recommendation-result low";
+                resultIcon.textContent = "!";
+                resultTitle.textContent = "Low moisture";
+                resultText.textContent =
+                    "Irrigation may be needed. Check crop and soil requirements.";
+            } else if (value < 45) {
+                resultBox.className = "recommendation-result medium";
+                resultIcon.textContent = "◷";
+                resultTitle.textContent = "Monitor moisture";
+                resultText.textContent =
+                    "Check field conditions before deciding whether to irrigate.";
+            } else {
+                resultBox.className = "recommendation-result good";
+                resultIcon.textContent = "✓";
+                resultTitle.textContent = "Moisture level is sufficient";
+                resultText.textContent =
+                    "This simple demo rule does not indicate an immediate irrigation need.";
+            }
+        }
 
-    if (value < 30) {
-        recommendationText.textContent =
-            "Low moisture: Irrigation may be needed.";
-    } else if (value < 45) {
-        recommendationText.textContent =
-            "Moderate moisture: Check irrigation requirement.";
-    } else {
-        recommendationText.textContent =
-            "Moisture level is sufficient for this demo.";
-    }
-});
-</script>
+        slider.addEventListener("input", updateRecommendation);
+        updateRecommendation();
+    </script>
 </body>
 </html>
