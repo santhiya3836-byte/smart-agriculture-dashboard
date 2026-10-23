@@ -1,31 +1,57 @@
 
 body {
     font-family: Arial, sans-serif;
-    background-color: #f0f7f0;
+    background: #f0f7f0;
     margin: 0;
-    padding: 20px;
+    padding: 28px;
     color: #243b2a;
 }
 
 h1 {
-    background-color: #237a3b;
+    background: #237a3b;
     color: white;
     text-align: center;
-    padding: 25px;
-    border-radius: 10px;
+    padding: 28px 12px;
+    border-radius: 14px;
+}
+
+.welcome {
+    text-align: center;
+    font-size: 18px;
 }
 
 h2 {
     color: #237a3b;
+    margin-top: 32px;
 }
 
-ul {
-    background-color: white;
-    padding: 25px 40px;
-    border-radius: 10px;
-    line-height: 2;
+.dashboard {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 20px;
 }
 
-p {
+.card {
+    background: white;
+    padding: 22px;
+    border-radius: 14px;
+    box-shadow: 0 3px 12px #00000012;
+    border-left: 5px solid #237a3b;
+}
+
+.card h3 {
+    margin-top: 0;
+}
+
+.value {
+    font-size: 30px;
+    font-weight: bold;
+    color: #237a3b;
+    margin-bottom: 8px;
+}
+
+footer {
     text-align: center;
+    margin-top: 35px;
+    padding: 20px;
 }
