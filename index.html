@@ -44,10 +44,40 @@
     <footer>
         Smart Agriculture Project | Agriculture Engineering
     </footer>
+
+
 <section class="recommendation">
     <h2>💧 Irrigation Recommendation</h2>
-    <p>Current soil moisture: 65%</p>
-    <p class="status">Water level is sufficient for this demo.</p>
+
+    <label for="moisture">Soil Moisture (%):</label>
+    <input type="range" id="moisture" min="0" max="100" value="65">
+
+    <p>Current soil moisture: <strong id="moistureValue">65%</strong></p>
+    <p class="status" id="recommendationText">
+        Moisture level is sufficient for this demo.
+    </p>
 </section>
+
+<script>
+const moistureSlider = document.getElementById("moisture");
+const moistureValue = document.getElementById("moistureValue");
+const recommendationText = document.getElementById("recommendationText");
+
+moistureSlider.addEventListener("input", function () {
+    const value = Number(this.value);
+    moistureValue.textContent = value + "%";
+
+    if (value < 30) {
+        recommendationText.textContent =
+            "Low moisture: Irrigation may be needed.";
+    } else if (value < 45) {
+        recommendationText.textContent =
+            "Moderate moisture: Check irrigation requirement.";
+    } else {
+        recommendationText.textContent =
+            "Moisture level is sufficient for this demo.";
+    }
+});
+</script>
 </body>
 </html>
